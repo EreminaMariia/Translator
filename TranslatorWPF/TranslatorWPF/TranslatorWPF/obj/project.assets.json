@@ -331,26 +331,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Kitar\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Users\\Roman_Kitar\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kitar\\source\\repos\\TranslatorWPF\\TranslatorWPF\\TranslatorWPF.csproj",
+      "projectUniqueName": "C:\\Users\\Roman_Kitar\\Desktop\\Translator\\TranslatorWPF\\TranslatorWPF\\TranslatorWPF\\TranslatorWPF.csproj",
       "projectName": "TranslatorWPF",
-      "projectPath": "C:\\Users\\Kitar\\source\\repos\\TranslatorWPF\\TranslatorWPF\\TranslatorWPF.csproj",
-      "packagesPath": "C:\\Users\\Kitar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kitar\\source\\repos\\TranslatorWPF\\TranslatorWPF\\obj\\",
+      "projectPath": "C:\\Users\\Roman_Kitar\\Desktop\\Translator\\TranslatorWPF\\TranslatorWPF\\TranslatorWPF\\TranslatorWPF.csproj",
+      "packagesPath": "C:\\Users\\Roman_Kitar\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Roman_Kitar\\Desktop\\Translator\\TranslatorWPF\\TranslatorWPF\\TranslatorWPF\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Kitar\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Roman_Kitar\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -358,7 +355,7 @@
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "http://nuget01.dev.rph.int/nuget/Teamcity": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

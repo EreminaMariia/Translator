@@ -1,20 +1,10 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 
 namespace TranslatorWPF
@@ -39,35 +29,23 @@ namespace TranslatorWPF
         {
             OpenFileDialog openDlg = new OpenFileDialog();
             openDlg.InitialDirectory = @"c:\";
-            openDlg.Filter = "Файлы ass|*.ass|Файлы srt|*.srt|Файлы mkv|*.mkv";
-            openDlg.ShowDialog();
-            return openDlg.FileName;
+            openDlg.Filter = "Файлы ass|*.ass|Файлы srt|*.srt|Файлы mkv|*.mkv";  
+            return openDlg.ShowDialog().Value ? openDlg.FileName : string.Empty;
         }
 
         private void OpenButton_Click(object sender, RoutedEventArgs e)
         {
             txtPath = GetPathFromDialog();
 
-            if (txtPath.Length == 0)
-            {
-                OpenWindow openWindow = new OpenWindow();
-                if (openWindow.ShowDialog() == true)
-                {
-                    if (openWindow.Path.Length > 0)
-                    {
-                        txtPath = openWindow.Path;
-                    }
-                    else
-                        MessageBox.Show("No path");
-                }
-                else
-                {
-                    MessageBox.Show("No path");
-                }
-            }
-
             if (txtPath.Length > 0)
             {
+                var extention = System.IO.Path.GetExtension(txtPath);
+                if (extention == ".mkv")
+                {
+                    VideoControl.Source = new Uri(txtPath);
+                    VideoControl.Play();
+                    VideoControl.Pause();
+                }
                 subtitleManager = new SubtitleManager(txtPath);
                 subs = new ObservableCollection<Subtitle>(subtitleManager.GetSubtitles());
                 this.Datagrid.ItemsSource = subs;
@@ -87,7 +65,7 @@ namespace TranslatorWPF
             int end = int.Parse(endTextBox.Text);
             subs = new ObservableCollection<Subtitle>(subtitleManager.TranslateSubtitles(start, end));
 
-            this.Datagrid.ItemsSource = subs;
+            Datagrid.ItemsSource = subs;
 
             InitializeComponent();
         }
@@ -98,10 +76,12 @@ namespace TranslatorWPF
             {
                 OpenFileDialog openDlg = new OpenFileDialog();
                 openDlg.InitialDirectory = @"c:\";
-                openDlg.ShowDialog();
-                VideoControl.Source = new Uri(openDlg.FileName);
-                VideoControl.Play();
-                VideoControl.Pause();
+                if (openDlg.ShowDialog().Value)
+                {
+                    VideoControl.Source = new Uri(openDlg.FileName);
+                    VideoControl.Play();
+                    VideoControl.Pause();
+                }
             }
             else
             {
@@ -143,6 +123,7 @@ namespace TranslatorWPF
             {
                 subs = new ObservableCollection<Subtitle>(subtitleManager.ShiftTime(shift, false));
             }
+            InitializeComponent();
         }
         void DG_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
@@ -162,15 +143,17 @@ namespace TranslatorWPF
                 }
             }
         }
-        void DG_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
+
+        private void Datagrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            var row = e.Row;
-            int id = row.GetIndex();
-            Subtitle s = row.DataContext as Subtitle;
-            TimeSpan t = s.Start;
-            VideoControl.Position = t;
-            VideoControl.Play();
-            VideoControl.Pause();
+            var subtitle = Datagrid.SelectedItem as Subtitle;
+            if(subtitle != null)
+            {
+                TimeSpan t = subtitle.Start;
+                VideoControl.Position = t;
+                VideoControl.Play();
+                VideoControl.Pause();
+            }
         }
     }
 }

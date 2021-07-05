@@ -75,14 +75,14 @@ namespace TranslatorWPF
 
             for (int i = 0; i < lines.Count; i++)
             {
-                if (!lines[i].StartsWith("Dialogue:"))
-                {
-                    _fileInfo.Add(lines[i]);
-                }
-                else
-                {
+                //if (!lines[i].StartsWith("Dialogue:"))
+                //{
+                //    _fileInfo.Add(lines[i]);
+                //}
+                //else
+                //{
                     _subtitles.Add(MakeSubFromString(lines[i]));
-                }
+                //}
             }
             return _subtitles;
         }
@@ -100,11 +100,11 @@ namespace TranslatorWPF
             //string translated = _translator.EngToRus(temp);
             _id++;
             string tempInfo = match.Value;
-            Regex infoRex = new Regex(@"Dialogue: \w*,\d+:\d+:\d+.\d+,\d+:\d+:\d+.\d+,");
-            string info = infoRex.Replace(tempInfo, "");
+            //Regex infoRex = new Regex(@"Dialogue: \w*,\d+:\d+:\d+.\d+,\d+:\d+:\d+.\d+,");
+            //string info = infoRex.Replace(tempInfo, "");
             string[] tempArr = match.Value.Split(',');
 
-            return new Subtitle { Id = _id, Text = temp, Info = info, Translated = "-", Start = TimeSpan.Parse(tempArr[1]), Finish = TimeSpan.Parse(tempArr[2]) };
+            return new Subtitle { Id = _id, Text = temp, Info = tempInfo, Translated = "-", Start = TimeSpan.Parse(tempArr[1]), Finish = TimeSpan.Parse(tempArr[2]) };
         }
 
         private List<string> MKVExtract()
@@ -177,6 +177,7 @@ namespace TranslatorWPF
         {
             var path = Path.Combine(_toolNixPath, filename);
             var lines = File.ReadAllLines(path);
+            _fileInfo.AddRange(lines.Where(x => !x.StartsWith("Dialogue")).ToList());
             return lines.Where(x => x.StartsWith("Dialogue")).ToList();
         }
 
@@ -216,7 +217,19 @@ namespace TranslatorWPF
                 }
                 foreach (Subtitle s in _subtitles)
                 {
-                    sw.WriteLine(s.Info + s.Translated);
+                    string[] tempArr = s.Info.Split(',');
+                    sw.Write(tempArr[0]+",");
+                    sw.Write(s.Start.ToString() + ",");
+                    sw.Write(s.Finish.ToString() + ",");
+                    for (int i = 3; i < tempArr.Length; i++)
+                    {
+                            sw.Write(tempArr[i]);                       
+                        if (i != tempArr.Length - 1)
+                        {
+                            sw.Write(',');
+                        }
+                    }
+                    sw.WriteLine(s.Translated);
                 }
             }
             string nixPath = _toolNixPath + Path.GetFileNameWithoutExtension(_spacelessPath) + ".ass";

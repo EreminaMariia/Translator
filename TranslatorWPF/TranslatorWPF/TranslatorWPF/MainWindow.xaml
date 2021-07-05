@@ -22,7 +22,7 @@
                 <Button Content="Save" Height = "20" MaxWidth="70" Margin="0 0 0 0" Click="SaveButton_Click" />
         </StackPanel>
             <MediaElement VerticalAlignment="Top" Canvas.Left="20" Canvas.Top ="40" Height = "200" Width="360"
-                Name="VideoControl" LoadedBehavior="Manual" UnloadedBehavior="Stop" >
+                Name="VideoControl" LoadedBehavior="Manual" UnloadedBehavior="Stop" ScrubbingEnabled="True">
             </MediaElement>
             <StackPanel Margin="0 5 10 0" HorizontalAlignment="Right">
                 <Label Height = "25" Name ="videoLabel">Video options:</Label>
@@ -39,11 +39,11 @@
         <Grid ScrollViewer.CanContentScroll="True" 
       ScrollViewer.VerticalScrollBarVisibility="Auto"
       ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.Row="1">
-            <DataGrid x:Name="Datagrid" AutoGenerateColumns="False" BeginningEdit ="DG_BeginningEdit" CellEditEnding="DG_CellEditEnding" HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top"  ItemsSource="{Binding Path=ListTest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  CanUserAddRows="False" CanUserReorderColumns ="False" 
-                      CanUserSortColumns ="False">
+            <DataGrid x:Name="Datagrid" AutoGenerateColumns="False" CellEditEnding="DG_CellEditEnding" HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top"  ItemsSource="{Binding Path=ListTest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  CanUserAddRows="False" CanUserReorderColumns ="False" 
+                      CanUserSortColumns ="False" SelectedCellsChanged="Datagrid_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id" Width="25" 
-                             Binding="{Binding Path=Id}"></DataGridTextColumn>
+                             Binding="{Binding Path=Id}" IsReadOnly="True"></DataGridTextColumn>
                     <DataGridTextColumn Header="Start" Width="80"
                              Binding="{Binding Path=Start}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Finish" Width="80"
