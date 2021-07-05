@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31402.337
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslatorWPF", "TranslatorWPF\TranslatorWPF.csproj", "{497FA735-7F62-445A-BDEF-87E990CF3BAF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{497FA735-7F62-445A-BDEF-87E990CF3BAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{497FA735-7F62-445A-BDEF-87E990CF3BAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{497FA735-7F62-445A-BDEF-87E990CF3BAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{497FA735-7F62-445A-BDEF-87E990CF3BAF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {65A0C44D-1D7C-4285-ABFD-A4CE1B3F1E41}
+	EndGlobalSection
+EndGlobal

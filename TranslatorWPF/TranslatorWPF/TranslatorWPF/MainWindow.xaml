@@ -1,0 +1,59 @@
+﻿<Window x:Class="TranslatorWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TranslatorWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+    </Window.Resources>
+    <Grid>
+        <Grid>
+        <StackPanel Grid.Row="0"  VerticalAlignment="Top" Margin="10 5 0 0" HorizontalAlignment="Left">
+                <Label Height = "25" Name ="fileLabel">File options:</Label>
+                <Button Height = "20" Content="Open"  MaxWidth="70" Margin="0 0 0 0" Click="OpenButton_Click" />
+                <Label Height = "25" Name ="startLabel"  >Start: </Label>
+                <TextBox Height = "20" Name="startTextBox" Width="50"/>
+                <Label Height = "25" Name ="endLabel">End:</Label>
+                <TextBox Name="endTextBox" Height = "20" Width="50"/>
+                <Button Content="Translate" Height = "20" MaxWidth="70" Margin="0 0 0 0" Click="TranslateButton_Click" />
+                <Button Content="Video" Height = "20" MaxWidth="70" Margin="0 0 0 0" Click="VideoButton_Click" />
+                <Button Content="Save" Height = "20" MaxWidth="70" Margin="0 0 0 0" Click="SaveButton_Click" />
+        </StackPanel>
+            <MediaElement VerticalAlignment="Top" Canvas.Left="20" Canvas.Top ="40" Height = "200" Width="360"
+                Name="VideoControl" LoadedBehavior="Manual" UnloadedBehavior="Stop" >
+            </MediaElement>
+            <StackPanel Margin="0 5 10 0" HorizontalAlignment="Right">
+                <Label Height = "25" Name ="videoLabel">Video options:</Label>
+                <Button Content="Start" Height = "20" MaxWidth="70" Margin="0 0 0 0" Click="StartButton_Click" />
+                <Button Content="Pause" Height = "20" MaxWidth="70" Margin="0 0 0 0" Click="PauseButton_Click" />
+                <Button Content="Stop" Height = "20" MaxWidth="70" Margin="0 0 0 0" Click="StopButton_Click" />
+                <Label Height = "25" Name ="shiftLabel">Shift time:</Label>
+                <TextBox Name="shiftTextBox" Height = "20" Width="50"/>
+                <RadioButton Margin="10,5,0,0" GroupName="directionButton" Name="backButton">Back</RadioButton>
+                <RadioButton Margin="10,5,0,0" GroupName="directionButton" Name="forwardButton">Forward</RadioButton>
+                <Button Content="Shift" Height = "20" MaxWidth="70" Margin="0 0 0 0" Click="ShiftButton_Click" />
+            </StackPanel>
+        </Grid>
+        <Grid ScrollViewer.CanContentScroll="True" 
+      ScrollViewer.VerticalScrollBarVisibility="Auto"
+      ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.Row="1">
+            <DataGrid x:Name="Datagrid" AutoGenerateColumns="False" BeginningEdit ="DG_BeginningEdit" CellEditEnding="DG_CellEditEnding" HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top"  ItemsSource="{Binding Path=ListTest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  CanUserAddRows="False" CanUserReorderColumns ="False" 
+                      CanUserSortColumns ="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Width="25" 
+                             Binding="{Binding Path=Id}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Start" Width="80"
+                             Binding="{Binding Path=Start}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Finish" Width="80"
+                             Binding="{Binding Path=Finish}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Text" Width="*"
+                             Binding="{Binding Path=Text}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Translated" Width="*"
+                             Binding="{Binding Path=Translated}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>
