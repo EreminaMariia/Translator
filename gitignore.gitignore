@@ -1,0 +1,59 @@
+
+#Ignore thumbnails created by Windows
+Thumbs.db
+#Ignore files built by Visual Studio
+*.obj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+[Bb]in
+[Dd]ebug*/
+*.lib
+*.sbr
+obj/
+[Rr]elease*/
+_ReSharper*/
+[Tt]est[Rr]esult*
+.vs/
+#Nuget packages folder
+packages/
+
+# WebStorm IDE project files
+.idea/
+
+# node.js modules directory
+node_modules/
+
+/App/PatientDecompensation.ClientApp/dist/*
+/App/PatientDecompensation.WebApp/web.config
+/App/PatientDecompensation.WebApp/wwwroot/img/*
+/App/PatientDecompensation.Service.Host/web.config
+/App/.artifacts/*
+
+/App/PatientDecompensation.WebApp/wwwroot/js/*
+/App/PatientDecompensation.WebApp/wwwroot/css/*
+/App/PatientDecompensation.WebApp/wwwroot/fonts/*
+/App/PatientDecompensation.ClientApp/public/assets/*
+/App/.vscode/*
+/App/PatientDecompensation.ClientApp/coverage/*
+/.vscode/*
+/App/PatientDecompensation.ClientApp/public/*
+/App/PatientDecompensation.ClientApp/public/scripts/*
+/App/PatientDecompensation.ClientApp/public/scripts/*
+/app/Directory.Build.props
+/app/BuildWarningReport
+/app/LintWarningReport
+/app/.nuke/build.schema.json
