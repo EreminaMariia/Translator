@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace TranslatorWPF
@@ -12,8 +11,7 @@ namespace TranslatorWPF
     {
         private readonly string _path;
         private string _subPath;
-        private string _spacelessPath;
-        private string _toolNixPath;
+        private readonly string _toolNixPath;
         private List<string> _fileInfo;
         private List<Subtitle> _subtitles;
         private int _id;
@@ -51,20 +49,7 @@ namespace TranslatorWPF
 
             if (extention == ".mkv")
             {
-                Regex spaceRex = new Regex(@" ");
-                _spacelessPath = spaceRex.Replace(_path, "");
-
-                if (!string.Equals(_path, _spacelessPath) && !File.Exists(_spacelessPath))
-                {
-                    File.Copy(_path, _spacelessPath);
-                }
-
                 lines = MKVExtract();
-
-                if (File.Exists(_spacelessPath))
-                {
-                    File.Delete(_spacelessPath);
-                }
             }
 
             else if (extention == ".ass" || extention == ".srt")
@@ -134,7 +119,7 @@ namespace TranslatorWPF
                     if (sw.BaseStream.CanWrite)
                     {
                         sw.WriteLine("cd " + _toolNixPath);
-                        sw.WriteLine("mkvmerge -i " + _spacelessPath);
+                        sw.WriteLine("mkvmerge -i " + "\"" + _path + "\"");
                     }
                 }
                 mkvInfo = p.StandardOutput.ReadToEnd();
@@ -159,14 +144,15 @@ namespace TranslatorWPF
                 s.StartInfo = info;
                 s.Start();
 
-                _subPath = Path.GetFileNameWithoutExtension(_spacelessPath) + ".ass";
+                _subPath = Path.GetFileNameWithoutExtension(_path) + ".ass";
 
                 using (StreamWriter sw = s.StandardInput)
                 {
                     if (sw.BaseStream.CanWrite)
                     {
+                        var extractLine = $"mkvextract \"{_path}\" tracks {pathNumber}:\"{_subPath}\"";
                         sw.WriteLine("cd " + _toolNixPath);
-                        sw.WriteLine("mkvextract " + _spacelessPath + " tracks " + pathNumber + ":" + _subPath);
+                        sw.WriteLine(extractLine);
                     }
                 }
                 s.WaitForExit();
@@ -232,7 +218,7 @@ namespace TranslatorWPF
                     sw.WriteLine(s.Translated);
                 }
             }
-            string nixPath = _toolNixPath + Path.GetFileNameWithoutExtension(_spacelessPath) + ".ass";
+            string nixPath = _toolNixPath + Path.GetFileNameWithoutExtension(_path) + ".ass";
             if (File.Exists(nixPath))
             {
                 File.Delete(nixPath);
