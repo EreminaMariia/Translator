@@ -190,3 +190,7 @@ git_stats/*
 StyleCop.Cache
 bin
 obj
+*.dll
+*.pdb
+*.ass
+TranslatorWPF/TranslatorWPF/.vs
