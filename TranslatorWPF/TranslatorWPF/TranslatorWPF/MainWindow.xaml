@@ -39,11 +39,9 @@
         <Grid ScrollViewer.CanContentScroll="True" 
       ScrollViewer.VerticalScrollBarVisibility="Auto"
       ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.Row="1">
-            <DataGrid x:Name="Datagrid" AutoGenerateColumns="False" CellEditEnding="DG_CellEditEnding" HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top"  ItemsSource="{Binding Path=ListTest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  CanUserAddRows="False" CanUserReorderColumns ="False" 
+            <DataGrid x:Name="Datagrid" LoadingRow="DataGrid_LoadingRow" AutoGenerateColumns="False" CellEditEnding="DG_CellEditEnding" HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top"  ItemsSource="{Binding Path=ListTest, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  CanUserAddRows="False" CanUserReorderColumns ="False" 
                       CanUserSortColumns ="False" SelectedCellsChanged="Datagrid_SelectedCellsChanged">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Width="25" 
-                             Binding="{Binding Path=Id}" IsReadOnly="True"></DataGridTextColumn>
                     <DataGridTextColumn Header="Start" Width="80"
                              Binding="{Binding Path=Start}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Finish" Width="80"

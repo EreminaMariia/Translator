@@ -25,6 +25,11 @@ namespace TranslatorWPF
             InitializeComponent();
         }
 
+        void DataGrid_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Header = (e.Row.GetIndex()+1).ToString();
+        }
+
         private string GetPathFromDialog()
         {
             OpenFileDialog openDlg = new OpenFileDialog();
@@ -50,8 +55,8 @@ namespace TranslatorWPF
                 subs = new ObservableCollection<Subtitle>(subtitleManager.GetSubtitles());
                 this.Datagrid.ItemsSource = subs;
 
-                this.startTextBox.Text = subs.Min(a => a.Id).ToString();
-                this.endTextBox.Text = subs.Max(a => a.Id).ToString();
+                this.startTextBox.Text = "1";
+                this.endTextBox.Text = subs.Count().ToString();
                 this.shiftTextBox.Text = new TimeSpan(0,0,0,0).ToString();
 
                 InitializeComponent();
@@ -63,7 +68,7 @@ namespace TranslatorWPF
             //try parse !!!
             int start = int.Parse(startTextBox.Text);
             int end = int.Parse(endTextBox.Text);
-            subs = new ObservableCollection<Subtitle>(subtitleManager.TranslateSubtitles(start, end));
+            subs = new ObservableCollection<Subtitle>(subtitleManager.TranslateSubtitles(start-1, end-1));
 
             Datagrid.ItemsSource = subs;
 
@@ -135,7 +140,7 @@ namespace TranslatorWPF
                     var bindingPath = (column.Binding as Binding).Path.Path;
                     if (bindingPath == "Translated")
                     {
-                        int id = e.Row.GetIndex() + 1;
+                        int id = e.Row.GetIndex();
                         var el = e.EditingElement as TextBox;
                         var text = el.Text;
                         subs = new ObservableCollection<Subtitle>(subtitleManager.EditTranslated(id, text));

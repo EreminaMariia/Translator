@@ -6,7 +6,6 @@ namespace TranslatorWPF
 {
     public class Subtitle
     {
-        public int Id { get; set; }
         public TimeSpan Start { get; set; }
         public TimeSpan Finish { get; set; }
         public string Text { get; set; }

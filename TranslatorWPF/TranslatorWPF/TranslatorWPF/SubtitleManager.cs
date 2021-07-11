@@ -29,10 +29,10 @@ namespace TranslatorWPF
 
         public List<Subtitle> TranslateSubtitles(int start, int end)
         {
-            foreach (Subtitle sub in _subtitles)
+            for (int i =0; i<_subtitles.Count();i++)
             {
-                if(sub.Id >=start && sub.Id<=end)
-                sub.Translated = _translator.EngToRus(sub.Text);
+                if(i >=start && i<=end)
+                _subtitles[i].Translated = _translator.EngToRus(_subtitles[i].Text);
             }
 
             return _subtitles;
@@ -89,7 +89,7 @@ namespace TranslatorWPF
             //string info = infoRex.Replace(tempInfo, "");
             string[] tempArr = match.Value.Split(',');
 
-            return new Subtitle { Id = _id, Text = temp, Info = tempInfo, Translated = "-", Start = TimeSpan.Parse(tempArr[1]), Finish = TimeSpan.Parse(tempArr[2]) };
+            return new Subtitle { Text = temp, Info = tempInfo, Translated = "-", Start = TimeSpan.Parse(tempArr[1]), Finish = TimeSpan.Parse(tempArr[2]) };
         }
 
         private List<string> MKVExtract()
@@ -187,7 +187,7 @@ namespace TranslatorWPF
 
         public List<Subtitle> EditTranslated(int id, string translatedText)
         {
-            Subtitle sub = _subtitles.Where(s => s.Id == id).First();
+            Subtitle sub = _subtitles[id];
             sub.Translated = translatedText;
             return _subtitles;
         }
