@@ -60,14 +60,7 @@ namespace TranslatorWPF
 
             for (int i = 0; i < lines.Count; i++)
             {
-                //if (!lines[i].StartsWith("Dialogue:"))
-                //{
-                //    _fileInfo.Add(lines[i]);
-                //}
-                //else
-                //{
                     _subtitles.Add(MakeSubFromString(lines[i]));
-                //}
             }
             return _subtitles;
         }
@@ -82,11 +75,8 @@ namespace TranslatorWPF
             string temp = formatRex.Replace(line, "");
             temp = bracketsRex.Replace(temp, "");
             temp = temp.Replace("\\N", " ");
-            //string translated = _translator.EngToRus(temp);
             _id++;
             string tempInfo = match.Value;
-            //Regex infoRex = new Regex(@"Dialogue: \w*,\d+:\d+:\d+.\d+,\d+:\d+:\d+.\d+,");
-            //string info = infoRex.Replace(tempInfo, "");
             string[] tempArr = match.Value.Split(',');
 
             return new Subtitle { Text = temp, Info = tempInfo, Translated = "-", Start = TimeSpan.Parse(tempArr[1]), Finish = TimeSpan.Parse(tempArr[2]) };

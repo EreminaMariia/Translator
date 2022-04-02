@@ -65,10 +65,12 @@ namespace TranslatorWPF
 
         private void TranslateButton_Click(object sender, RoutedEventArgs e)
         {
-            //try parse !!!
-            int start = int.Parse(startTextBox.Text);
-            int end = int.Parse(endTextBox.Text);
-            subs = new ObservableCollection<Subtitle>(subtitleManager.TranslateSubtitles(start-1, end-1));
+            bool start = int.TryParse(startTextBox.Text, out int startNum);
+            bool end = int.TryParse(endTextBox.Text, out int endNum);
+            if (start && end)
+            {
+                subs = new ObservableCollection<Subtitle>(subtitleManager.TranslateSubtitles(startNum - 1, endNum - 1));
+            }
 
             Datagrid.ItemsSource = subs;
 

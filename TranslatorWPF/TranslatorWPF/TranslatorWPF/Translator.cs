@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Google.Cloud.Translation.V2;
 
 namespace TranslatorWPF
@@ -9,7 +7,6 @@ namespace TranslatorWPF
     {
         public string EngToRus(string str)
         {
-            //Console.OutputEncoding = Encoding.UTF8;
             TranslationClient client = TranslationClient.Create();
             var response = client.TranslateText(
                 text: str,
